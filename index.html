@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson's Disease Symptom Checker</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fbe7ec;
+            background-image: linear-gradient(135deg, #fbe7ec 0%, #f8d0e0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(176, 96, 136, 0.15);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #b06088;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #b06088;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #b06088;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #4CAF50;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #4CAF50;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            /* max-width: 1000px; */
+            margin: 0 auto;
+            padding: 3rem;
+            text-align: center;
+            /* background-color: rgba(255, 255, 255, 0.8); */
+            border-radius: 20px;
+            /* box-shadow: 0 10px 30px rgba(176, 96, 136, 0.2); */
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgba(176, 96, 136, 0.1);
+        }
+
+        .character-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .character-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto;
+            filter: drop-shadow(0 8px 16px rgba(176, 96, 136, 0.3));
+        }
+
+        .character {
+            width: 100%;
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            top: 10px;
+            left: -10px;
+            background-color: #f9c15e;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 3s infinite ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: #b06088;
+            border-radius: 50%;
+            margin: 0 2px;
+        }
+
+        .question-mark {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            font-size: 2.5rem;
+            color: #b06088;
+            animation: bounce 2s infinite ease-in-out;
+            text-shadow: 0 4px 8px rgba(176, 96, 136, 0.3);
+        }
+
+        h1 {
+            color: #b06088;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #4CAF50, transparent);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            color: #b06088;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .disclaimer {
+            color: #b06088;
+            font-size: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.4s;
+            animation-fill-mode: both;
+            line-height: 1.8;
+        }
+
+        .cta-section {
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #4CAF50, #65e469);
+            color: white;
+            border: none;
+            padding: 16px 42px;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+            animation: pulse 2s infinite ease-in-out, fadeInUp 1s ease-out 0.6s;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(45deg, #3d9c41, #54c958);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(76, 175, 80, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .feature-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 250px;
+            box-shadow: 0 8px 16px rgba(176, 96, 136, 0.15);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.8s;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #4CAF50;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(176, 96, 136, 0.25);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #b06088;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .footer {
+            background-color: #b06088;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #4CAF50;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: #4CAF50;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            width: 100%;
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .container {
+                padding: 2rem 1rem;
+                margin: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .character-container {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .feature-cards {
+                gap: 1rem;
+            }
+            
+            .feature-card {
+                max-width: 100%;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .footer-links, .footer-social {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">P</div>
+            <span>ParkCheck</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Symptoms</a>
+            <a href="#" class="nav-link">Resources</a>
+            <a href="#" class="nav-link">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="container">
+            <div class="character-wrapper">
+                <div class="character-container">
+                    <svg class="character" viewBox="0 0 200 200">
+                        <!-- Character face -->
+                        <circle cx="100" cy="80" r="50" fill="#fff" stroke="#b06088" stroke-width="3"/>
+                        <!-- Hair -->
+                        <path d="M60 65 Q100 30 140 65" fill="#f9c15e" stroke="#b06088" stroke-width="2"/>
+                        <!-- Eyes -->
+                        <circle cx="80" cy="75" r="5" fill="#b06088"/>
+                        <circle cx="120" cy="75" r="5" fill="#b06088"/>
+                        <!-- Mouth -->
+                        <path d="M90 95 Q100 105 110 95" stroke="#b06088" stroke-width="2" fill="none"/>
+                        <!-- Body -->
+                        <rect x="75" y="130" width="50" height="60" fill="#fff" stroke="#b06088" stroke-width="3"/>
+                        <!-- Bowtie -->
+                        <polygon points="100,130 85,145 100,160 115,145" fill="#4CAF50" stroke="#388E3C" stroke-width="1"/>
+                        <!-- Hand -->
+                        <circle cx="70" cy="150" r="10" fill="#fff" stroke="#b06088" stroke-width="2"/>
+                        <line x1="75" y1="145" x2="80" y2="150" stroke="#b06088" stroke-width="2"/>
+                    </svg>
+                    <div class="speech-bubble">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="question-mark">?</div>
+                </div>
+            </div>
+            
+            <h1>Parkinson's Disease</h1>
+            <div class="subtitle">Symptom Checker</div>
+            <p class="disclaimer">The following list is not exhaustive. Always discuss your symptoms with a medical professional. Early detection is key for managing Parkinson's disease effectively.</p>
+            
+            <div class="cta-section">
+                <button class="cta-button" id="start-button">Check Your Symptoms Now</button>
+            </div>
+            
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-title">Quick Assessment</div>
+                    <div class="feature-text">Complete a comprehensive symptom check in just 5 minutes.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Expert Verified</div>
+                    <div class="feature-text">Checklist developed by neurologists specializing in movement disorders.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <div class="feature-title">Detailed Report</div>
+                    <div class="feature-text">Receive a summary you can share with your healthcare provider.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">ParkCheck</div>
+            
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Use</a>
+                <a href="#" class="footer-link">Disclaimer</a>
+                <a href="#" class="footer-link">Support</a>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">t</a>
+                <a href="#" class="social-icon">in</a>
+            </div>
+            
+            <div class="copyright">
+                © 2025 ParkCheck | Parkinson's Disease Awareness Initiative. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add button animation and functionality
+            const startButton = document.getElementById('start-button');
+            
+            startButton.addEventListener('click', function() {
+                // Animation when clicked
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                    // Here you would typically redirect to the actual symptom checker page
+                   window.location.href = '/pages/home.html'; // Redirect to symptom checker page
+                }, 200);
+            });
+
+            // Add hover animations to the character
+            const character = document.querySelector('.character-container');
+            character.addEventListener('mouseover', function() {
+                document.querySelector('.character').style.animation = 'pulse 1s infinite ease-in-out';
+                document.querySelector('.speech-bubble').style.animation = 'float 1.5s infinite ease-in-out';
+                document.querySelector('.question-mark').style.animation = 'bounce 1s infinite ease-in-out';
+            });
+            
+            character.addEventListener('mouseout', function() {
+                document.querySelector('.character').style.animation = 'pulse 4s infinite ease-in-out';
+                document.querySelector('.speech-bubble').style.animation = 'float 3s infinite ease-in-out';
+                document.querySelector('.question-mark').style.animation = 'bounce 2s infinite ease-in-out';
+            });
+            
+            // Animate navigation links on hover
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseover', function() {
+                    this.style.transition = 'all 0.3s ease';
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                link.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Animate feature cards on scroll
+            const featureCards = document.querySelectorAll('.feature-card');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

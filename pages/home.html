@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Parkinson's Detection System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .fade-in {
+        animation: fadeIn 1s ease-in-out;
+      }
+      footer {
+        background-color: #000;
+        color: #fff;
+        padding: 3rem 0;
+        margin-top: 6rem;
+        opacity: 1;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .footer-links a {
+        color: var(--secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+
+      .copyright {
+        margin-top: 2rem;
+        color: var(--accent);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-black p-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white font-bold text-2xl">Parkinson's Detection</div>
+        <div class="space-x-6">
+          <a
+            href="#"
+            class="text-white hover:text-gray-300 transition duration-300"
+            >Home</a
+          >
+          <a
+            href="about-us.html"
+            class="text-white hover:text-gray-300 transition duration-300"
+            >About</a
+          >
+          <a
+            href="contact-us.html"
+            class="text-white hover:text-gray-300 transition duration-300"
+            >Contact</a
+          >
+         
+          <a onclick="logout()" href="#" class="text-white hover:text-gray-300 transition duration-300 ">Log Out</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-black text-white py-20 fade-in">
+      <div class="container mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 animate-bounce">
+          Early Detection of Parkinson's Disease
+        </h1>
+        <p class="text-lg md:text-xl mb-8">
+          Identify symptoms early and get the help you need.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div id="start" class="container mx-auto mt-10 p-6 fade-in">
+      <!-- Symptom Checklist -->
+      <div
+        class="bg-white rounded-lg shadow-md p-8 mb-10 transition-transform transform hover:scale-105"
+      >
+        <h2 class="text-3xl font-bold mb-6">Symptom Checklist</h2>
+        <p class="mb-6">Select any symptoms you are currently experiencing:</p>
+
+        <form id="parkinsons-form" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <label
+              class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm hover:bg-gray-200 transition duration-300"
+            >
+              <input type="checkbox" id="tremor" class="mr-3" /> Tremor
+            </label>
+            <label
+              class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm hover:bg-gray-200 transition duration-300"
+            >
+              <input type="checkbox" id="stiffness" class="mr-3" /> Stiffness
+            </label>
+            <label
+              class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm hover:bg-gray-200 transition duration-300"
+            >
+              <input type="checkbox" id="slowness" class="mr-3" /> Slowness of
+              Movement
+            </label>
+            <label
+              class="flex items-center bg-gray-100 p-4 rounded-lg shadow-sm hover:bg-gray-200 transition duration-300"
+            >
+              <input type="checkbox" id="balance" class="mr-3" /> Balance
+              Problems
+            </label>
+          </div>
+
+          <h3 class="text-xl font-bold mt-8">Symptom Severity Input</h3>
+          <div class="space-y-4">
+            <input
+              type="text"
+              id="tremors-severity"
+              placeholder="Tremors (Mild, Moderate, Severe)"
+              class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black transition duration-300"
+            />
+            <input
+              type="text"
+              id="stiffness-severity"
+              placeholder="Stiffness (Mild, Moderate, Severe)"
+              class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black transition duration-300"
+            />
+            <input
+              type="text"
+              id="balance-severity"
+              placeholder="Balance Issues (Mild, Moderate, Severe)"
+              class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black transition duration-300"
+            />
+            <input
+              type="text"
+              id="fatigue-severity"
+              placeholder="Fatigue (Mild, Moderate, Severe)"
+              class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black transition duration-300"
+            />
+            <input
+              type="text"
+              id="mood-severity"
+              placeholder="Mood Changes (Mild, Moderate, Severe)"
+              class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black transition duration-300"
+            />
+          </div>
+
+          <h3 class="text-xl font-bold mt-8">
+            Parkinson's Disease Identification
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <p class="font-semibold mb-2">
+                Do you experience tremors (shaking) at rest?
+              </p>
+              <label class="mr-6"
+                ><input type="radio" name="tremor" value="yes" class="mr-2" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="tremor" value="no" class="mr-2" />
+                No</label
+              >
+            </div>
+
+            <div>
+              <p class="font-semibold mb-2">
+                Do you experience muscle stiffness or rigidity?
+              </p>
+              <label class="mr-6"
+                ><input
+                  type="radio"
+                  name="stiffness"
+                  value="yes"
+                  class="mr-2"
+                />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="stiffness" value="no" class="mr-2" />
+                No</label
+              >
+            </div>
+
+            <div>
+              <p class="font-semibold mb-2">
+                Have you noticed slowness of movement (bradykinesia)?
+              </p>
+              <label class="mr-6"
+                ><input type="radio" name="slowness" value="yes" class="mr-2" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="slowness" value="no" class="mr-2" />
+                No</label
+              >
+            </div>
+
+            <div>
+              <p class="font-semibold mb-2">
+                Do you have problems with balance or frequent falls?
+              </p>
+              <label class="mr-6"
+                ><input type="radio" name="balance" value="yes" class="mr-2" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="balance" value="no" class="mr-2" />
+                No</label
+              >
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="mt-6 bg-black hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105"
+          >
+            Submit Symptoms
+          </button>
+        </form>
+      </div>
+
+      <!-- Result Section -->
+      <div
+        id="result"
+        class="hidden bg-white rounded-lg shadow-md p-8 mb-10 fade-in"
+      >
+        <h2 class="text-3xl font-bold mb-6" id="result-heading">Result</h2>
+        <p id="result-text" class="text-xl"></p>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container mx-auto px-6 py-8">
+        <div class="footer-content">
+          <div class="footer-logo">Parkinson's Detection System</div>
+          <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Sitemap</a>
+          </div>
+        </div>
+        <div class="copyright"> © 2025 Parkinson's Detection System. All rights reserved.</div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("parkinsons-form");
+        const resultSection = document.getElementById("result");
+        const resultHeading = document.getElementById("result-heading");
+        const resultText = document.getElementById("result-text");
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          // Get checkbox values
+          const tremor = document.getElementById("tremor").checked;
+          const stiffness = document.getElementById("stiffness").checked;
+          const slowness = document.getElementById("slowness").checked;
+          const balance = document.getElementById("balance").checked;
+
+          // Get radio button values
+          const tremorRadio = document.querySelector(
+            'input[name="tremor"]:checked'
+          );
+          const stiffnessRadio = document.querySelector(
+            'input[name="stiffness"]:checked'
+          );
+          const slownessRadio = document.querySelector(
+            'input[name="slowness"]:checked'
+          );
+          const balanceRadio = document.querySelector(
+            'input[name="balance"]:checked'
+          );
+
+          let symptomsYesCount = 0;
+
+          if (tremor || (tremorRadio && tremorRadio.value === "yes"))
+            symptomsYesCount++;
+          if (stiffness || (stiffnessRadio && stiffnessRadio.value === "yes"))
+            symptomsYesCount++;
+          if (slowness || (slownessRadio && slownessRadio.value === "yes"))
+            symptomsYesCount++;
+          if (balance || (balanceRadio && balanceRadio.value === "yes"))
+            symptomsYesCount++;
+
+          if (symptomsYesCount >= 3) {
+            resultHeading.textContent = "You have Parkinson's Disease";
+            resultText.textContent =
+              "Based on the symptoms you've selected, it is recommended to consult a healthcare professional for a full diagnosis.";
+          } else {
+            resultHeading.textContent = "You don't have Parkinson's Disease";
+            resultText.textContent =
+              "The symptoms you've selected do not align strongly with Parkinson's Disease. Please monitor your health and consult a professional if symptoms persist.";
+          }
+
+          // Show result section
+          resultSection.classList.remove("hidden");
+        });
+      });
+
+      function logout() {
+        // Perform logout action here (e.g., redirect to login page)
+        window.localStorage.removeItem("key"); // Clear user data from local storage
+        window.location.href = "../auth/login.html"; // Redirect to login page
+      }
+    </script>
+  </body>
+</html>
