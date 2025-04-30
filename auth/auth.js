@@ -132,7 +132,7 @@ function login() {
                 if (result[0].password == hashpassword) {
                     localStorage.setItem("key", encrypted);
                     alert('Login successful');
-                    window.location.href = '../pages/home.html';
+                    window.location.href = '../index.html';
 
                 }
                 else {

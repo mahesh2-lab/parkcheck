@@ -3,20 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us </title>
+    <title>About Us</title>
     <style>
-      /* Base Styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Inter", sans-serif;
+      /* Color Theme */
+      :root {
+        --primary-bg-pink: #f9d9df;
+        --secondary-gradient-pink: #f6c9d3;
+        --heading-text-purple: #a35277;
+        --body-text-muted-pink: #a77a99;
+        --nav-link-text-pink: #d48da6;
+        --primary-button-green: #4caf50;
+        --card-border-green: #8bc34a;
+        --accent-purple: #9c27b0;
+        --white: #ffffff;
+        --shadow-gray: #e0e0e0;
       }
 
       body {
-        background-color: #fff;
-        color: #000;
+        background-color: var(--primary-bg-pink);
+        color: var(--body-text-muted-pink);
         overflow-x: hidden;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       .container {
@@ -27,9 +34,9 @@
 
       /* Navigation Styles */
       nav {
-        background-color: #000;
+        background-color: var(--white);
         padding: 1rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 4px var(--shadow-gray);
         position: sticky;
         top: 0;
         z-index: 1000;
@@ -45,7 +52,7 @@
       }
 
       .logo {
-        color: white;
+        color: var(--heading-text-purple);
         font-size: 1.5rem;
         font-weight: bold;
       }
@@ -56,20 +63,20 @@
       }
 
       .nav-links a {
-        color: white;
+        color: var(--nav-link-text-pink);
         text-decoration: none;
         transition: color 0.3s ease;
       }
 
       .nav-links a:hover {
-        color: #ccc;
+        color: var(--accent-purple);
       }
 
       .menu-toggle {
         display: none;
         background: none;
         border: none;
-        color: white;
+        color: var(--nav-link-text-pink);
         font-size: 1.5rem;
         cursor: pointer;
       }
@@ -85,7 +92,7 @@
           flex-direction: column;
           display: none;
           margin-top: 1rem;
-          background-color: #000;
+          background-color: var(--white);
           padding: 1rem;
           border-radius: 5px;
         }
@@ -97,6 +104,12 @@
 
       /* Hero Section */
       .hero {
+        background: linear-gradient(
+          to right,
+          var(--primary-bg-pink),
+          var(--secondary-gradient-pink)
+        );
+        color: var(--heading-text-purple);
         min-height: 80vh;
         display: flex;
         align-items: center;
@@ -131,8 +144,8 @@
       }
 
       .btn {
-        background: #fff;
-        color: #000;
+        background: var(--primary-button-green);
+        color: var(--white);
         padding: 15px 30px;
         border-radius: 30px;
         font-size: 16px;
@@ -146,8 +159,9 @@
       }
 
       .btn:hover {
+        background: var(--card-border-green);
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       }
 
       /* Animated Background */
@@ -202,7 +216,7 @@
         margin-bottom: 80px;
         position: relative;
         display: inline-block;
-        color: #fff;
+        color: var(--heading-text-purple);
       }
 
       .section-title:after {
@@ -212,7 +226,7 @@
         left: 0;
         width: 60px;
         height: 3px;
-        background: #fff;
+        background: var(--accent-purple);
       }
 
       .about-grid {
@@ -224,6 +238,7 @@
       .about-content h3 {
         font-size: 32px;
         margin-bottom: 25px;
+        color: var(--heading-text-purple);
         opacity: 0;
         transform: translateY(30px);
       }
@@ -232,6 +247,7 @@
         font-size: 18px;
         line-height: 1.8;
         margin-bottom: 25px;
+        color: var(--body-text-muted-pink);
         opacity: 0;
         transform: translateY(30px);
       }
@@ -249,7 +265,7 @@
         left: -20px;
         width: 100%;
         height: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid var(--shadow-gray);
         z-index: 0;
       }
 
@@ -265,7 +281,7 @@
       /* Team Section */
       .team-section {
         padding: 120px 0;
-        background-color: #111;
+        background-color: var(--secondary-gradient-pink);
       }
 
       .team-grid {
@@ -275,17 +291,19 @@
       }
 
       .team-member {
-        background: #000;
+        background: var(--white);
         padding: 30px;
         border-radius: 10px;
         text-align: center;
         transition: all 0.3s ease;
+        box-shadow: 0 4px 8px var(--shadow-gray);
         opacity: 0;
         transform: translateY(30px);
       }
 
       .team-member:hover {
         transform: translateY(-10px);
+        border: 1px solid var(--card-border-green);
       }
 
       .member-img {
@@ -306,10 +324,11 @@
       .team-member h4 {
         font-size: 22px;
         margin-bottom: 5px;
+        color: var(--heading-text-purple);
       }
 
       .team-member p {
-        color: #fff;
+        color: var(--body-text-muted-pink);
         margin-bottom: 20px;
       }
 
@@ -323,7 +342,8 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--shadow-gray);
+        color: var(--heading-text-purple);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -331,8 +351,8 @@
       }
 
       .social-links a:hover {
-        background: #fff;
-        color: #000;
+        background: var(--accent-purple);
+        color: var(--white);
       }
 
       /* Values Section */
@@ -347,8 +367,9 @@
       }
 
       .value-card {
+        background: var(--white);
         padding: 40px 30px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--shadow-gray);
         border-radius: 10px;
         transition: all 0.3s ease;
         opacity: 0;
@@ -356,7 +377,7 @@
       }
 
       .value-card:hover {
-        border-color: rgba(255, 255, 255, 0.3);
+        border-color: var(--card-border-green);
         transform: translateY(-10px);
       }
 
@@ -368,10 +389,11 @@
       .value-card h4 {
         font-size: 24px;
         margin-bottom: 15px;
+        color: var(--heading-text-purple);
       }
 
       .value-card p {
-        color: #000;
+        color: var(--body-text-muted-pink);
         line-height: 1.7;
       }
 
@@ -464,8 +486,8 @@
       }
 
       footer {
-        background-color: #000;
-        color: #fff;
+        background-color: var(--white);
+        color: var(--body-text-muted-pink);
         padding: 3rem 0;
         margin-top: 6rem;
         opacity: 1;
@@ -480,6 +502,7 @@
       .footer-logo {
         font-size: 1.5rem;
         font-weight: 700;
+        color: var(--heading-text-purple);
       }
 
       .footer-links {
@@ -488,18 +511,18 @@
       }
 
       .footer-links a {
-        color: var(--secondary);
+        color: var(--nav-link-text-pink);
         text-decoration: none;
         transition: color 0.3s ease;
       }
 
       .footer-links a:hover {
-        color: var(--accent);
+        color: var(--accent-purple);
       }
 
       .copyright {
         margin-top: 2rem;
-        color: var(--accent);
+        color: var(--body-text-muted-pink);
         text-align: center;
       }
 
@@ -579,7 +602,7 @@
         }
 
         .section-title {
-          color: #fff;
+          color: var(--heading-text-purple);
           font-size: 36px;
         }
 
@@ -608,7 +631,7 @@
           &#9776;
         </button>
         <div class="nav-links" id="nav-links">
-          <a href="home.html">Home</a>
+          <a href="../index.html">Home</a>
           <a href="about-us.html">About</a>
           <a href="contact-us.html">Contact</a>
         </div>
@@ -695,40 +718,55 @@
         <div class="team-grid">
           <div class="team-member animate-on-scroll">
             <div class="member-img">
-              <img src="/api/placeholder/160/160" alt="Team Member" />
+              <img src="./user.png" alt="Team Member" />
             </div>
-            <h4>Sarah Johnson</h4>
-            <p>Creative Director</p>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
+            <h4>Mr. Shubham Landkar</h4>
+            <p>Team Member</p>
           </div>
+
           <div class="team-member animate-on-scroll">
             <div class="member-img">
-              <img src="/api/placeholder/160/160" alt="Team Member" />
+              <img src="./user.png" alt="Team Member" />
             </div>
             <h4>Michael Chen</h4>
-            <p>Lead Developer</p>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-github"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
+            <p>Mr. Tejas Adhao
+            </p>
           </div>
+
           <div class="team-member animate-on-scroll">
             <div class="member-img">
-              <img src="/api/placeholder/160/160" alt="Team Member" />
+              <img src="./user2.png" alt="Team Member" />
             </div>
-            <h4>Emma Rodriguez</h4>
-            <p>UX Designer</p>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-dribbble"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
+            <h4>Ms. Sayali khakhare </h4>
+            <p>Team Member</p>
           </div>
+
+          <div class="team-member animate-on-scroll">
+            <div class="member-img">
+              <img src="./user2.png" alt="Team Member" />
+            </div>
+            <h4>Ms. Sakshi Raut 
+            </h4>
+            <p>Team Member</p>
+          </div>
+
+          <div class="team-member animate-on-scroll">
+            <div class="member-img">
+              <img src="./user.png" alt="Team Member" />
+            </div>
+            <h4>Mr. Pranay kapse
+            </h4>
+            <p>Team Member</p>
+          </div>
+
+          <div class="team-member animate-on-scroll">
+            <div class="member-img">
+              <img src="./user.png" alt="Team Member" />
+            </div>
+            <h4>Mr. Shaikh zareef shaikh faheem</h4>
+            <p>Team Member</p>
+          </div>
+
         </div>
       </div>
     </section>
@@ -789,13 +827,12 @@
     </footer>
 
     <script>
-      
       document.addEventListener("DOMContentLoaded", function () {
-        const token = window.localStorage.getItem("key"); 
+        const token = window.localStorage.getItem("key");
         if (!token) {
-          window.location.href = "../auth/login.html"; 
+          window.location.href = "../auth/login.html";
         } else {
-          console.log("Token found:", token); 
+          console.log("Token found:", token);
         }
 
         const elements = document.querySelectorAll(".animate-on-scroll");
@@ -818,7 +855,6 @@
           observer.observe(element);
         });
 
-        
         const aboutElements = document.querySelectorAll(
           ".about-content h3, .about-content p"
         );
@@ -827,19 +863,16 @@
           element.style.animation = "fadeInUp 0.8s forwards";
         });
 
-        
         const teamMembers = document.querySelectorAll(".team-member");
         teamMembers.forEach((member, index) => {
           member.style.transitionDelay = `${0.1 + index * 0.1}s`;
         });
 
-        
         const valueCards = document.querySelectorAll(".value-card");
         valueCards.forEach((card, index) => {
           card.style.transitionDelay = `${0.1 + index * 0.1}s`;
         });
 
-        
         const hero = document.querySelector(".hero");
 
         hero.addEventListener("mousemove", (e) => {
@@ -856,7 +889,6 @@
         });
       });
 
-      
       const menuBtn = document.getElementById("menu-btn");
       const navLinks = document.getElementById("nav-links");
 

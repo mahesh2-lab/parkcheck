@@ -526,10 +526,16 @@
         <span>Parkinson's Detection System</span>
       </div>
       <nav class="nav-links">
-        <a href="./pages/home.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Home</a>
         <a href="./pages/about-us.html" class="nav-link">About</a>
-        <a href="#" class="nav-link">Resources</a>
         <a href="./pages/contact-us.html" class="nav-link">Contact</a>
+        <button class="nav-link" style="  
+          background: none;
+          border: none;
+          color: #b06088;
+          font-size: 1rem;
+          cursor: pointer;
+        " id="login-button" >logout</button>
       </nav>
     </header>
 
@@ -669,28 +675,37 @@
         </div>
 
         <div class="copyright">
-          © 2025 Parkinson's Disease Awareness Initiative. All
-          rights reserved.
+          © 2025 Parkinson's Disease Awareness Initiative. All rights reserved.
         </div>
       </div>
     </footer>
 
     <script>
+       function logout() {
+        window.localStorage.removeItem("key"); 
+        window.location.href = "../auth/login.html"; 
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
+        const loginButton = document.getElementById("login-button");
+        loginButton.addEventListener("click", function () {
+          logout();
+        });
+        
+        const token = window.localStorage.getItem("key");
+        if (!token) {
+          window.location.href = "../auth/login.html";
+        } else {
+          console.log("Token found:", token);
+        }
         const startButton = document.getElementById("start-button");
 
         startButton.addEventListener("click", function () {
           this.style.transform = "scale(0.95)";
           setTimeout(() => {
             this.style.transform = "";
-            let key = window.localStorage.getItem("key");
 
-            if (key) {
-              window.location.href = "./pages/home.html";
-              return;
-            }
-
-            window.location.href = "./auth/login.html";
+            window.location.href = "./pages/home.html";
           }, 200);
         });
 
