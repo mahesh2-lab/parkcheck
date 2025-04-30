@@ -789,8 +789,15 @@
     </footer>
 
     <script>
-      // Intersection Observer for scroll animations
+      
       document.addEventListener("DOMContentLoaded", function () {
+        const token = window.localStorage.getItem("key"); 
+        if (!token) {
+          window.location.href = "../auth/login.html"; 
+        } else {
+          console.log("Token found:", token); 
+        }
+
         const elements = document.querySelectorAll(".animate-on-scroll");
 
         const observer = new IntersectionObserver(
@@ -811,7 +818,7 @@
           observer.observe(element);
         });
 
-        // Initialize animations with delay
+        
         const aboutElements = document.querySelectorAll(
           ".about-content h3, .about-content p"
         );
@@ -820,19 +827,19 @@
           element.style.animation = "fadeInUp 0.8s forwards";
         });
 
-        // Team member animation with delay
+        
         const teamMembers = document.querySelectorAll(".team-member");
         teamMembers.forEach((member, index) => {
           member.style.transitionDelay = `${0.1 + index * 0.1}s`;
         });
 
-        // Values animation with delay
+        
         const valueCards = document.querySelectorAll(".value-card");
         valueCards.forEach((card, index) => {
           card.style.transitionDelay = `${0.1 + index * 0.1}s`;
         });
 
-        // Cursor animation
+        
         const hero = document.querySelector(".hero");
 
         hero.addEventListener("mousemove", (e) => {
@@ -849,7 +856,7 @@
         });
       });
 
-      // Toggle Navigation Menu
+      
       const menuBtn = document.getElementById("menu-btn");
       const navLinks = document.getElementById("nav-links");
 
