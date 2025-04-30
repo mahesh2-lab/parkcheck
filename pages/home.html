@@ -490,7 +490,7 @@
           console.log(formValues);
 
           try {
-            const client = await Client.connect("http://127.0.0.1:7860/");
+            const client = await Client.connect("https://model-0j2u.onrender.com/gradio/");
             const result = await client.predict("/predict", {
               model_name: formValues.model_name,
               param_1: formValues["mdvp-fo"] || 0,
