@@ -490,6 +490,30 @@
             >
             Submit Symptoms
             </button>
+
+            <div id="loading-spinner" class="hidden text-center mt-6">
+              <svg
+                class="animate-spin h-8 w-8 text-gray-800 mx-auto"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v8H4z"
+                ></path>
+              </svg>
+              <p class="mt-2 text-gray-600">Processing your request...</p>
+            </div>
         </form>
       </div>
 
@@ -519,13 +543,15 @@
     </footer>
 
     <script type="module">
+      
       import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
       function logout() {
         window.localStorage.removeItem("key"); 
         window.location.href = "../auth/login.html"; 
       }
-
+      
       document.addEventListener("DOMContentLoaded", () => {
+        let loading = false;
 
         const token = window.localStorage.getItem("key"); 
         if (!token) {
@@ -540,9 +566,20 @@
         const resultSection = document.getElementById("result");
         const resultHeading = document.getElementById("result-heading");
         const resultText = document.getElementById("result-text");
+        const loadingSpinner = document.getElementById("loading-spinner");
+
+        const toggleLoadingSpinner = (isLoading) => {
+          if (isLoading) {
+            loadingSpinner.classList.remove("hidden");
+          } else {
+            loadingSpinner.classList.add("hidden");
+          }
+        };
 
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
+          loading = true;
+          toggleLoadingSpinner(loading);
 
           const formData = new FormData(e.target);
           const formValues = Object.fromEntries(formData.entries());
@@ -575,7 +612,8 @@
               param_21: formValues["d2"] || 0,
               param_22: formValues["ppe"] || 0,
             });
-
+            loading = false;
+            toggleLoadingSpinner(loading);
             console.log(result);
             resultSection.classList.remove("hidden");
             resultHeading.innerHTML = `
