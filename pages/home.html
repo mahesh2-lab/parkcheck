@@ -201,7 +201,8 @@
         <p class="mb-6">Select any symptoms you are currently experiencing:</p>
 
         <form id="parkinsons-form" class="space-y-6">
-          <div>
+          <h1>Using Random Forest Classifier</h1>
+          <div class='hidden'>
             <label for="severity" class="block text-lg font-medium mb-2"
               >Slect Model</label
             >
@@ -790,6 +791,7 @@
 
       function fillParkinsonValues() {
         const values = {
+          "model_name": "Random Forest Classifier",
           "mdvp-fo": 120.3,
           "mdvp-fhi": 230.5,
           "mdvp-flo": 85.7,
@@ -824,6 +826,7 @@
 
       function fillHealthyValues() {
   const values = {
+    "model_name": "Decision Tree Classifier",
     "mdvp-fo": 200.5,
     "mdvp-fhi": 220.1,
     "mdvp-flo": 190.3,
