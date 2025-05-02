@@ -9,16 +9,16 @@
     <style>
       /* Color Theme */
       :root {
-        --primary-bg-pink: #F9D9DF;
-        --secondary-gradient-pink: #F6C9D3;
-        --heading-text-purple: #A35277;
-        --body-text-muted-pink: #A77A99;
-        --nav-link-text-pink: #D48DA6;
-        --primary-button-green: #4CAF50;
-        --card-border-green: #8BC34A;
-        --accent-purple: #9C27B0;
-        --white: #FFFFFF;
-        --shadow-gray: #E0E0E0;
+        --primary-bg-pink: #f9d9df;
+        --secondary-gradient-pink: #f6c9d3;
+        --heading-text-purple: #a35277;
+        --body-text-muted-pink: #a77a99;
+        --nav-link-text-pink: #d48da6;
+        --primary-button-green: #4caf50;
+        --card-border-green: #8bc34a;
+        --accent-purple: #9c27b0;
+        --white: #ffffff;
+        --shadow-gray: #e0e0e0;
       }
 
       body {
@@ -26,7 +26,12 @@
         color: var(--body-text-muted-pink);
       }
 
-      h1, h2, h3, h4, h5, h6 {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         color: var(--heading-text-purple);
       }
 
@@ -89,13 +94,15 @@
         border-color: var(--card-border-green);
       }
 
-      input, select {
+      input,
+      select {
         border: 1px solid var(--shadow-gray);
         background-color: var(--white);
         color: var(--body-text-muted-pink);
       }
 
-      input:focus, select:focus {
+      input:focus,
+      select:focus {
         border-color: var(--accent-purple);
         outline: none;
         box-shadow: 0 0 4px var(--accent-purple);
@@ -166,7 +173,31 @@
       <div
         class="bg-white rounded-lg shadow-md p-8 mb-10 transition-transform transform"
       >
-        <h2 class="text-3xl font-bold mb-6">Symptom Checklist</h2>
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-3xl font-bold mb-6">Symptom Checklist</h2>
+
+          <div class="flex items-center space-x-2">
+            <p>developer options</p>
+            <input type="checkbox" id="show-advanced-options" />
+          </div>
+          <div class="hidden" id="advanced-options">
+            <button
+              id="fill-healthy"
+              class="bg-[#F6C9D3] hover:bg-[#F9D9DF] text-[#A35277] font-semibold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105"
+              
+            >
+              Fill Healthy Values
+            </button>
+
+            <button
+              id="fill-parkinsons"
+              class="bg-[#F6C9D3] hover:bg-[#F9D9DF] text-[#A35277] font-semibold py-2 px-4 rounded-lg transition duration-300 transform hover:scale-105"
+              
+            >
+              Fill Parkinson's Values
+            </button>
+          </div>
+        </div>
         <p class="mb-6">Select any symptoms you are currently experiencing:</p>
 
         <form id="parkinsons-form" class="space-y-6">
@@ -220,11 +251,10 @@
             <label>
               MDVP:Fo(Hz)
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-fo"
                 name="mdvp-fo"
                 placeholder="Mean Fundamental Frequency"
@@ -234,11 +264,10 @@
             <label>
               MDVP:Fhi(Hz)
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0.000000000"
                 max="0.99999999999"
-                value="0.00"
                 id="mdvp-fhi"
                 name="mdvp-fhi"
                 placeholder="Maximum Fundamental Frequency"
@@ -248,11 +277,10 @@
             <label>
               MDVP:Flo(Hz)
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-flo"
                 name="mdvp-flo"
                 placeholder="Minimum Fundamental Frequency"
@@ -262,11 +290,10 @@
             <label>
               MDVP:Jitter(%)
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-jitter"
                 name="mdvp-jitter"
                 placeholder="MDVP:Jitter (percent)"
@@ -276,11 +303,10 @@
             <label>
               MDVP:Jitter(Abs)
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-jitter-abs"
                 name="mdvp-jitter-abs"
                 placeholder="MDVP:Jitter (absolute)"
@@ -290,11 +316,10 @@
             <label>
               MDVP:RAP
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-rap"
                 name="mdvp-rap"
                 placeholder="Relative Average Perturbation"
@@ -304,11 +329,10 @@
             <label>
               MDVP:PPQ
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-ppq"
                 name="mdvp-ppq"
                 placeholder="Pitch Period Perturbation Quotient"
@@ -318,11 +342,10 @@
             <label>
               Jitter:DDP
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="jitter-ddp"
                 name="jitter-ddp"
                 placeholder="Difference of Differences of Periods"
@@ -332,11 +355,10 @@
             <label>
               MDVP:Shimmer
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-shimmer"
                 name="mdvp-shimmer"
                 placeholder="MDVP:Shimmer(percent)"
@@ -346,11 +368,10 @@
             <label>
               MDVP:Shimmer(dB)
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-shimmer-db"
                 name="mdvp-shimmer-db"
                 placeholder="MDVP:Shimmer in decibels"
@@ -360,11 +381,10 @@
             <label>
               Shimmer:APQ3
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="shimmer-apq3"
                 name="shimmer-apq3"
                 placeholder="Shimmer:Amplitude Perturbation Quotient-3"
@@ -374,11 +394,10 @@
             <label>
               Shimmer:APQ5
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="shimmer-apq5"
                 name="shimmer-apq5"
                 placeholder="Shimmer:Amplitude Perturbation Quotient-5"
@@ -388,11 +407,10 @@
             <label>
               MDVP:APQ
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="mdvp-apq"
                 name="mdvp-apq"
                 placeholder="MDVP:Average Perturbation Quotient"
@@ -402,11 +420,10 @@
             <label>
               Shimmer:DDA
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="shimmer-dda"
                 name="shimmer-dda"
                 placeholder="Shimmer:Difference of Differences of Amplitudes"
@@ -416,11 +433,10 @@
             <label>
               NHR
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="nhr"
                 name="nhr"
                 placeholder="Noise-to-Harmonics Ratio"
@@ -430,11 +446,10 @@
             <label>
               HNR
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="hnr"
                 name="hnr"
                 placeholder="Harmonics-to-Noise Ratio"
@@ -444,11 +459,10 @@
             <label>
               RPDE
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="rpde"
                 name="rpde"
                 placeholder="Recurrence Period Density Entropy"
@@ -458,11 +472,10 @@
             <label>
               DFA
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="dfa"
                 name="dfa"
                 placeholder="Detrended Fluctuation Analysis"
@@ -472,11 +485,10 @@
             <label>
               Spread1
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="spread1"
                 name="spread1"
                 placeholder="First nonlinear spread measure"
@@ -486,11 +498,10 @@
             <label>
               Spread2
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="spread2"
                 name="spread2"
                 placeholder="Second nonlinear spread measure"
@@ -500,11 +511,10 @@
             <label>
               D2
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="d2"
                 name="d2"
                 placeholder="Correlation Dimension"
@@ -514,11 +524,10 @@
             <label>
               PPE
               <input
-                type="number"
+                type="text"
                 step="0.001"
                 min="0"
                 max="1"
-                value="0.00"
                 id="ppe"
                 name="ppe"
                 placeholder="Pitch Period Entropy"
@@ -572,36 +581,36 @@
             </div>
           </div>
 
-            <button
+          <button
             type="submit"
             class="mt-6 bg-gray-200 hover:bg-gray-300 text-black font-semibold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105"
-            >
+          >
             Submit Symptoms
-            </button>
+          </button>
 
-            <div id="loading-spinner" class="hidden text-center mt-6">
-              <svg
-                class="animate-spin h-8 w-8 text-gray-800 mx-auto"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  class="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  stroke-width="4"
-                ></circle>
-                <path
-                  class="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v8H4z"
-                ></path>
-              </svg>
-              <p class="mt-2 text-gray-600">Processing your request...</p>
-            </div>
+          <div id="loading-spinner" class="hidden text-center mt-6">
+            <svg
+              class="animate-spin h-8 w-8 text-gray-800 mx-auto"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              ></path>
+            </svg>
+            <p class="mt-2 text-gray-600">Processing your request...</p>
+          </div>
         </form>
       </div>
 
@@ -615,15 +624,27 @@
       </div>
     </div>
 
-    <footer class="bg-gradient-to-r from-[#F9D9DF] to-[#F6C9D3] text-gray-800 py-8">
+    <footer
+      class="bg-gradient-to-r from-[#F9D9DF] to-[#F6C9D3] text-gray-800 py-8"
+    >
       <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="footer-logo text-2xl font-bold text-[#A35277] mb-4 md:mb-0">
+          <div
+            class="footer-logo text-2xl font-bold text-[#A35277] mb-4 md:mb-0"
+          >
             Parkinson's Detection System
           </div>
           <div class="footer-links flex space-x-6">
-            <a href="#" class="text-[#D48DA6] hover:text-[#9C27B0] transition duration-300">Privacy Policy</a>
-            <a href="#" class="text-[#D48DA6] hover:text-[#9C27B0] transition duration-300">Terms of Service</a>
+            <a
+              href="#"
+              class="text-[#D48DA6] hover:text-[#9C27B0] transition duration-300"
+              >Privacy Policy</a
+            >
+            <a
+              href="#"
+              class="text-[#D48DA6] hover:text-[#9C27B0] transition duration-300"
+              >Terms of Service</a
+            >
           </div>
         </div>
         <div class="copyright text-center text-sm text-[#A77A99] mt-6">
@@ -633,22 +654,34 @@
     </footer>
 
     <script type="module">
-      
       import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
       function logout() {
-        window.localStorage.removeItem("key"); 
-        window.location.href = "../auth/login.html"; 
+        window.localStorage.removeItem("key");
+        window.location.href = "../auth/login.html";
       }
-      
+
       document.addEventListener("DOMContentLoaded", () => {
         let loading = false;
 
-        const token = window.localStorage.getItem("key"); 
+        const token = window.localStorage.getItem("key");
         if (!token) {
-          window.location.href = "../auth/login.html"; 
+          window.location.href = "../auth/login.html";
         } else {
-          console.log("Token found:", token); 
+          console.log("Token found:", token);
         }
+
+        const showAdvancedOptions = document.getElementById(
+          "show-advanced-options"
+        );
+        const advancedOptions = document.getElementById("advanced-options");
+
+        showAdvancedOptions.addEventListener("change", (e) => {
+          if (e.target.checked) {
+            advancedOptions.classList.remove("hidden");
+          } else {
+            advancedOptions.classList.add("hidden");
+          }
+        });
 
         const logoutButton = document.getElementById("logout-button");
         logoutButton.addEventListener("click", logout);
@@ -657,6 +690,21 @@
         const resultHeading = document.getElementById("result-heading");
         const resultText = document.getElementById("result-text");
         const loadingSpinner = document.getElementById("loading-spinner");
+
+        const fillHealthyButton = document.getElementById("fill-healthy");
+        const fillParkinsonsButton = document.getElementById(
+          "fill-parkinsons"
+        );
+
+        fillHealthyButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          fillHealthyValues();
+        });
+
+        fillParkinsonsButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          fillParkinsonValues();
+        });
 
         const toggleLoadingSpinner = (isLoading) => {
           if (isLoading) {
@@ -676,7 +724,9 @@
           console.log(formValues);
 
           try {
-            const client = await Client.connect("https://model-0j2u.onrender.com/gradio/");
+            const client = await Client.connect(
+              "https://model-0j2u.onrender.com/gradio/"
+            );
             const result = await client.predict("/predict", {
               model_name: formValues.model_name,
               param_1: formValues["mdvp-fo"] || 0,
@@ -738,7 +788,75 @@
         });
       });
 
-  
-    </script>
+      function fillParkinsonValues() {
+        const values = {
+          "mdvp-fo": 120.3,
+          "mdvp-fhi": 230.5,
+          "mdvp-flo": 85.7,
+          "mdvp-jitter": 0.0078,
+          "mdvp-jitter-abs": 0.00008,
+          "mdvp-rap": 0.0045,
+          "mdvp-ppq": 0.0051,
+          "jitter-ddp": 0.0135,
+          "mdvp-shimmer": 0.036,
+          "mdvp-shimmer-db": 0.42,
+          "shimmer-apq3": 0.0195,
+          "shimmer-apq5": 0.0227,
+          "mdvp-apq": 0.0273,
+          "shimmer-dda": 0.0586,
+          nhr: 0.045,
+          hnr: 17.2,
+          rpde: 0.58,
+          dfa: 0.74,
+          spread1: -6.55,
+          spread2: 0.13,
+          d2: 2.4,
+          ppe: 0.24,
+        };
+
+        for (const [name, value] of Object.entries(values)) {
+          const input = document.querySelector(`input[name="${name}"]`);
+          if (input) {
+            input.value = value;
+          }
+        }
+      }
+
+      function fillHealthyValues() {
+  const values = {
+    "mdvp-fo": 200.5,
+    "mdvp-fhi": 220.1,
+    "mdvp-flo": 190.3,
+    "mdvp-jitter": 0.0021,
+    "mdvp-jitter-abs": 0.00002,
+    "mdvp-rap": 0.0011,
+    "mdvp-ppq": 0.0013,
+    "jitter-ddp": 0.0033,
+    "mdvp-shimmer": 0.015,
+    "mdvp-shimmer-db": 0.17,
+    "shimmer-apq3": 0.0074,
+    "shimmer-apq5": 0.0081,
+    "mdvp-apq": 0.009,
+    "shimmer-dda": 0.022,
+    "nhr": 0.011,
+    "hnr": 25.4,
+    "rpde": 0.45,
+    "dfa": 0.62,
+    "spread1": -4.1,
+    "spread2": 0.03,
+    "d2": 1.7,
+    "ppe": 0.08
+  };
+
+  for (const [name, value] of Object.entries(values)) {
+    const input = document.querySelector(`input[name="${name}"]`);
+    if (input) {
+      input.value = value;
+    }
+  }
+}
+
+   
+   </script>
   </body>
 </html>
