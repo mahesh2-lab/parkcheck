@@ -791,7 +791,7 @@
 
       function fillParkinsonValues() {
         const values = {
-          "model_name": "Random Forest Classifier",
+        
           "mdvp-fo": 120.3,
           "mdvp-fhi": 230.5,
           "mdvp-flo": 85.7,
@@ -815,6 +815,9 @@
           d2: 2.4,
           ppe: 0.24,
         };
+        let select = document.getElementsByName("model_name")[0];
+        select.value = "Random Forest Classifier";
+        
 
         for (const [name, value] of Object.entries(values)) {
           const input = document.querySelector(`input[name="${name}"]`);
@@ -826,7 +829,6 @@
 
       function fillHealthyValues() {
   const values = {
-    "model_name": "Decision Tree Classifier",
     "mdvp-fo": 200.5,
     "mdvp-fhi": 220.1,
     "mdvp-flo": 190.3,
@@ -850,6 +852,9 @@
     "d2": 1.7,
     "ppe": 0.08
   };
+
+        let select = document.getElementsByName("model_name")[0];
+        select.value = "Decision Tree Classifier";
 
   for (const [name, value] of Object.entries(values)) {
     const input = document.querySelector(`input[name="${name}"]`);
